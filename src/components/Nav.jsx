@@ -15,7 +15,7 @@ class Nav extends Component {
     const { topics, isLoading } = this.state;
     if (isLoading) {
       return <Loader />;
-    } else
+    } else {
       return (
         <nav>
           <ul>
@@ -32,6 +32,7 @@ class Nav extends Component {
           </ul>
         </nav>
       );
+    }
   }
 }
 

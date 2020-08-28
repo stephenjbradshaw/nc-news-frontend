@@ -1,11 +1,12 @@
 import React from "react";
 import ArticlesList from "./ArticlesList";
 
-const Home = () => {
+const Home = (props) => {
+  const { topic } = props;
   return (
     <main>
       Articles dropdown here
-      <ArticlesList />
+      <ArticlesList topic={topic} />
     </main>
   );
 };

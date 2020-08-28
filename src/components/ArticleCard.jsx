@@ -1,10 +1,10 @@
 import React from "react";
 import Voter from "./Voter";
 
-const ArticleCard = () => {
+const ArticleCard = ({ article }) => {
   return (
     <li>
-      Article here
+      <p>{article.title}</p>
       <Voter />
     </li>
   );
