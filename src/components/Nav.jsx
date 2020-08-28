@@ -1,16 +1,37 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
+import { Link } from "@reach/router";
+import Loader from "./Loader";
 
 class Nav extends Component {
-  state = {};
+  state = { topics: [], isLoading: true };
 
   componentDidMount() {
     api.getTopics().then((topics) => {
-      console.log(topics);
+      this.setState({ topics, isLoading: false });
     });
   }
   render() {
-    return <nav></nav>;
+    const { topics, isLoading } = this.state;
+    if (isLoading) {
+      return <Loader />;
+    } else
+      return (
+        <nav>
+          <ul>
+            <Link to="/" key="home">
+              <button>home</button>
+            </Link>
+            {topics.map((topic) => {
+              return (
+                <Link to={topic.slug} key={topic.slug}>
+                  <button>{topic.slug}</button>
+                </Link>
+              );
+            })}
+          </ul>
+        </nav>
+      );
   }
 }
 
