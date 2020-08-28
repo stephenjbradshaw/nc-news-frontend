@@ -1,7 +1,7 @@
 import React from "react";
 import ArticlesList from "./ArticlesList";
 
-const Articles = () => {
+const Home = () => {
   return (
     <main>
       Articles dropdown here
@@ -10,4 +10,4 @@ const Articles = () => {
   );
 };
 
-export default Articles;
+export default Home;

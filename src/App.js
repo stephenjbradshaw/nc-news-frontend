@@ -2,13 +2,17 @@ import React from "react";
 import "./App.css";
 
 import Header from "./components/Header";
-import Articles from "./components/Articles";
+import Home from "./components/Home";
+import { Router } from "@reach/router";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Articles />
+      <Router>
+        <Home path="/" />
+        <Home path="/:topic" />
+      </Router>
     </div>
   );
 }
