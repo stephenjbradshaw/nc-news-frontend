@@ -20,7 +20,7 @@ class Nav extends Component {
         <nav>
           <ul>
             <Link to="/" key="home">
-              <button>home</button>
+              <button>all articles</button>
             </Link>
             {topics.map((topic) => {
               return (

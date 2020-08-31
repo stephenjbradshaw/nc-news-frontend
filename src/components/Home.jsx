@@ -5,7 +5,6 @@ const Home = (props) => {
   const { topic } = props;
   return (
     <main>
-      Articles dropdown here
       <ArticlesList topic={topic} />
     </main>
   );
