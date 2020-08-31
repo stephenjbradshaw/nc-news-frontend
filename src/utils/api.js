@@ -38,3 +38,7 @@ export const getArticles = (topic, sort) => {
       return articles;
     });
 };
+
+export const patchVotes = (kind, id, change) => {
+  return axiosInstance.patch(`/${kind}s/${id}`, { inc_votes: change });
+};

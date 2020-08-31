@@ -11,7 +11,7 @@ const ArticleCard = ({ article }) => {
       <p>{article.body}</p>
       <p>{article.comment_count} comments</p>
 
-      <Voter votes={article.votes} />
+      <Voter kind={"article"} id={article.article_id} votes={article.votes} />
     </li>
   );
 };
