@@ -5,7 +5,7 @@ const ArticleCard = ({ article }) => {
   return (
     <li>
       <p>
-        {article.topic} | Posted by {article.author} {article.created_at} ago
+        {article.topic} | Posted by {article.author} ago
       </p>
       <h2>{article.title}</h2>
       <p>{article.body}</p>

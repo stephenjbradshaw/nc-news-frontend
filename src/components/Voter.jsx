@@ -3,72 +3,77 @@ import * as api from "../utils/api";
 import { VoteButton } from "../styled/lib";
 
 class Voter extends Component {
-  state = { kind: null, id: null, voteStatus: null, votes: 0 };
+  state = { optimisticVotes: 0 };
 
   componentDidMount() {
-    const { kind, id, votes } = this.props;
-    const retrievedVoteStatus = localStorage.getItem(
+    const { kind, id } = this.props;
+    const retrievedOptimisticVotes = localStorage.getItem(
       `${kind}_${id}_voteStatus`
     );
-    if (retrievedVoteStatus !== undefined) {
-      const parsedVoteStatus = JSON.parse(retrievedVoteStatus);
-      this.setState({ voteStatus: parsedVoteStatus });
+    if (retrievedOptimisticVotes) {
+      this.setState({ optimisticVotes: JSON.parse(retrievedOptimisticVotes) });
     }
-    this.setState({ kind, id, votes });
   }
 
   componentDidUpdate() {
-    const { kind, id, voteStatus } = this.state;
+    // to do, only save to local storage if 1 or -1, not when it's zero (save space)
+    const { kind, id } = this.props;
+    const { optimisticVotes } = this.state;
+    console.log(optimisticVotes, "optimisticVotes on componentDidUpdate");
     localStorage.setItem(
       `${kind}_${id}_voteStatus`,
-      JSON.stringify(voteStatus)
+      JSON.stringify(optimisticVotes)
     );
   }
 
-  handleUpvoteClick = (event) => {
-    const { kind, id, voteStatus } = this.state;
+  updateVote = (voteType) => {
+    const { kind, id } = this.props;
+    const { optimisticVotes } = this.state;
 
-    if (voteStatus === null) {
-      this.setState({ votes: this.state.votes + 1, voteStatus: "upvoted" });
-      api.patchVotes(kind, id, 1);
-    } else if (voteStatus === "upvoted") {
-      this.setState({ votes: this.state.votes - 1, voteStatus: null });
-      api.patchVotes(kind, id, -1);
-    } else if (voteStatus === "downvoted") {
-      this.setState({ votes: this.state.votes + 2, voteStatus: "upvoted" });
-      api.patchVotes(kind, id, +2);
-    }
-  };
-
-  handleDownvoteClick = (event) => {
-    const { kind, id, voteStatus } = this.state;
-
-    if (voteStatus === null) {
-      this.setState({ votes: this.state.votes - 1, voteStatus: "downvoted" });
-      api.patchVotes(kind, id, -1);
-    } else if (voteStatus === "downvoted") {
-      this.setState({ votes: this.state.votes + 1, voteStatus: null });
-      api.patchVotes(kind, id, 1);
-    } else if (voteStatus === "upvoted") {
-      this.setState({ votes: this.state.votes - 2, voteStatus: "downvoted" });
-      api.patchVotes(kind, id, -2);
+    if (voteType === "up") {
+      if (optimisticVotes === 0) {
+        this.setState({ optimisticVotes: 1 });
+        api.patchVotes(kind, id, 1);
+      } else if (optimisticVotes === 1) {
+        this.setState({ optimisticVotes: 0 });
+        api.patchVotes(kind, id, -1);
+      } else if (optimisticVotes === -1) {
+        this.setState({ optimisticVotes: 1 });
+        api.patchVotes(kind, id, 2);
+      }
+    } else if (voteType === "down") {
+      if (optimisticVotes === 0) {
+        this.setState({ optimisticVotes: -1 });
+        api.patchVotes(kind, id, -1);
+      } else if (optimisticVotes === -1) {
+        this.setState({ optimisticVotes: 0 });
+        api.patchVotes(kind, id, 1);
+      } else if (optimisticVotes === 1) {
+        this.setState({ optimisticVotes: -1 });
+        api.patchVotes(kind, id, -2);
+      }
     }
   };
 
   render() {
-    const { voteStatus, votes } = this.state;
-    const isUpvoted = voteStatus === "upvoted";
-    const isDownvoted = voteStatus === "downvoted";
+    const { votes } = this.props;
+    const { optimisticVotes } = this.state;
 
     return (
       <aside>
-        <VoteButton voted={isUpvoted} onClick={this.handleUpvoteClick}>
+        <VoteButton
+          voted={optimisticVotes === 1}
+          onClick={(event) => this.updateVote("up")}
+        >
           <span role="img" aria-label="Up arrow">
             🔼
           </span>
         </VoteButton>
-        <p>Votes: {votes}</p>
-        <VoteButton voted={isDownvoted} onClick={this.handleDownvoteClick}>
+        <p>{votes + optimisticVotes}</p>
+        <VoteButton
+          voted={optimisticVotes === -1}
+          onClick={(event) => this.updateVote("down")}
+        >
           <span role="img" aria-label="Down arrow">
             🔽
           </span>
