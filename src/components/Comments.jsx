@@ -2,9 +2,15 @@ import React, { Component } from "react";
 import * as api from "../utils/api";
 import Loader from "./Loader";
 import CommentCard from "./CommentCard";
+import AddComment from "./AddComment";
 
 class Comments extends Component {
-  state = { comments: [], isLoading: true, sort: "newest" };
+  state = {
+    comments: [],
+    isLoading: true,
+    sort: "newest",
+    formIsVisible: false,
+  };
 
   componentDidMount() {
     const { article_id } = this.props;
@@ -32,8 +38,19 @@ class Comments extends Component {
     this.setState({ sort: value });
   };
 
+  handleShowForm = () => {
+    this.setState({ formIsVisible: !this.state.formIsVisible });
+  };
+
+  addComment = (newComment) => {
+    console.log("addcomment called");
+    this.setState({ comments: [newComment, ...this.state.comments] });
+  };
+
   render() {
-    const { comments, isLoading, sort } = this.state;
+    const { comments, isLoading, sort, formIsVisible } = this.state;
+    const { article_id } = this.props;
+
     if (isLoading) return <Loader />;
     return (
       <section>
@@ -49,6 +66,12 @@ class Comments extends Component {
           <option value="most_votes">Most votes</option>
           <option value="least_votes">Least votes</option>
         </select>
+        <button onClick={this.handleShowForm}>
+          {formIsVisible ? "Hide" : "Add comment..."}
+        </button>
+        {formIsVisible && (
+          <AddComment addComment={this.addComment} article_id={article_id} />
+        )}
         <ul>
           {comments.map((comment) => {
             return (

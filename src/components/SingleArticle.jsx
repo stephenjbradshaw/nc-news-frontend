@@ -3,10 +3,9 @@ import ArticleCard from "./ArticleCard";
 import Loader from "./Loader";
 import * as api from "../utils/api";
 import Comments from "./Comments";
-import AddComment from "./AddComment";
 
 class SingleArticle extends Component {
-  state = { article: {}, isLoading: true, formIsVisible: false };
+  state = { article: {}, isLoading: true };
 
   componentDidMount() {
     const { article_id } = this.props;
@@ -15,12 +14,8 @@ class SingleArticle extends Component {
     });
   }
 
-  handleClick = () => {
-    this.setState({ formIsVisible: !this.state.formIsVisible });
-  };
-
   render() {
-    const { article, isLoading, formIsVisible } = this.state;
+    const { article, isLoading } = this.state;
     const { article_id } = this.props;
 
     if (isLoading) return <Loader />;
@@ -29,10 +24,6 @@ class SingleArticle extends Component {
         <article>
           <ArticleCard article={article} isListItem={false} />
         </article>
-        <button onClick={this.handleClick}>
-          {formIsVisible ? "Hide" : "Add comment..."}
-        </button>
-        {formIsVisible && <AddComment />}
         <Comments article_id={article_id} />
       </main>
     );
