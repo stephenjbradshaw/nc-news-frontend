@@ -3,7 +3,7 @@ import ArticleCard from "./ArticleCard";
 import * as api from "../utils/api";
 import Loader from "./Loader";
 
-class ArticlesList extends Component {
+class Articles extends Component {
   state = { articles: [], isLoading: true, sort: "newest" };
 
   componentDidMount() {
@@ -37,34 +37,31 @@ class ArticlesList extends Component {
 
   render() {
     const { articles, isLoading, sort } = this.state;
-    if (isLoading) {
-      return <Loader />;
-    } else {
-      return (
-        <main>
-          <label htmlFor="sort-by">Sort articles by: </label>
-          <select
-            name="sort-by"
-            id="sort-by"
-            value={sort}
-            onChange={this.handleSortChange}
-          >
-            <option value="newest">Newest</option>
-            <option value="oldest">Oldest</option>
-            <option value="most_comments">Most comments</option>
-            <option value="least_comments">Least comments</option>
-            <option value="most_votes">Most votes</option>
-            <option value="least_votes">Least votes</option>
-          </select>
-          <ul>
-            {articles.map((article) => {
-              return <ArticleCard key={article.article_id} article={article} />;
-            })}
-          </ul>
-        </main>
-      );
-    }
+    if (isLoading) return <Loader />;
+    return (
+      <main>
+        <label htmlFor="sort-by">Sort articles by: </label>
+        <select
+          name="sort-by"
+          id="sort-by"
+          value={sort}
+          onChange={this.handleSortChange}
+        >
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="most_comments">Most comments</option>
+          <option value="least_comments">Least comments</option>
+          <option value="most_votes">Most votes</option>
+          <option value="least_votes">Least votes</option>
+        </select>
+        <ul>
+          {articles.map((article) => {
+            return <ArticleCard key={article.article_id} article={article} />;
+          })}
+        </ul>
+      </main>
+    );
   }
 }
 
-export default ArticlesList;
+export default Articles;
