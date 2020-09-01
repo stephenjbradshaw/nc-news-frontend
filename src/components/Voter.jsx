@@ -16,10 +16,8 @@ class Voter extends Component {
   }
 
   componentDidUpdate() {
-    // to do, only save to local storage if 1 or -1, not when it's zero (save space)
     const { kind, id } = this.props;
     const { optimisticVotes } = this.state;
-    console.log(optimisticVotes, "optimisticVotes on componentDidUpdate");
     localStorage.setItem(
       `${kind}_${id}_voteStatus`,
       JSON.stringify(optimisticVotes)

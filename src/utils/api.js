@@ -5,9 +5,7 @@ const axiosInstance = axios.create({
 });
 
 export const getTopics = () => {
-  return axiosInstance.get("/topics").then(({ data: { topics } }) => {
-    return topics;
-  });
+  return axiosInstance.get("/topics").then(({ data: { topics } }) => topics);
 };
 
 export const getArticles = (topic, sort) => {
@@ -34,11 +32,36 @@ export const getArticles = (topic, sort) => {
   }
   return axiosInstance
     .get("/articles", { params: { topic, sort_by, order } })
-    .then(({ data: { articles } }) => {
-      return articles;
-    });
+    .then(({ data: { articles } }) => articles);
 };
 
 export const patchVotes = (kind, id, change) => {
   return axiosInstance.patch(`/${kind}s/${id}`, { inc_votes: change });
+};
+
+export const getSingleArticle = (article_id) => {
+  return axiosInstance
+    .get(`/articles/${article_id}`)
+    .then(({ data: { article } }) => article);
+};
+
+export const getComments = (article_id, sort) => {
+  let sort_by;
+  let order;
+  if (sort === "newest") {
+    sort_by = "created_at";
+    order = "desc";
+  } else if (sort === "oldest") {
+    sort_by = "created_at";
+    order = "asc";
+  } else if (sort === "most_votes") {
+    sort_by = "votes";
+    order = "desc";
+  } else if (sort === "least_votes") {
+    sort_by = "votes";
+    order = "asc";
+  }
+  return axiosInstance
+    .get(`/articles/${article_id}/comments`, { params: { sort_by, order } })
+    .then(({ data: { comments } }) => comments);
 };

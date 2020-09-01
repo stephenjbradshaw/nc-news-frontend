@@ -4,7 +4,7 @@ import { Link } from "@reach/router";
 
 const ArticleCard = ({ article, isListItem }) => {
   return (
-    <li>
+    <>
       <p>
         {article.topic} | Posted by {article.author} ago
       </p>
@@ -20,7 +20,7 @@ const ArticleCard = ({ article, isListItem }) => {
       <p>{article.comment_count} comments</p>
 
       <Voter kind={"article"} id={article.article_id} votes={article.votes} />
-    </li>
+    </>
   );
 };
 
