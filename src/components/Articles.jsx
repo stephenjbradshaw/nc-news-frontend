@@ -56,7 +56,13 @@ class Articles extends Component {
         </select>
         <ul>
           {articles.map((article) => {
-            return <ArticleCard key={article.article_id} article={article} />;
+            return (
+              <ArticleCard
+                key={article.article_id}
+                article={article}
+                isListItem={true}
+              />
+            );
           })}
         </ul>
       </main>

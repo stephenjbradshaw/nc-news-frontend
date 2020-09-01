@@ -1,13 +1,21 @@
 import React from "react";
 import Voter from "./Voter";
+import { Link } from "@reach/router";
 
-const ArticleCard = ({ article }) => {
+const ArticleCard = ({ article, isListItem }) => {
   return (
     <li>
       <p>
         {article.topic} | Posted by {article.author} ago
       </p>
-      <h2>{article.title}</h2>
+      {isListItem ? (
+        <Link to={`/article/${article.article_id}`}>
+          <h2>{article.title}</h2>
+        </Link>
+      ) : (
+        <h2>{article.title}</h2>
+      )}
+
       <p>{article.body}</p>
       <p>{article.comment_count} comments</p>
 

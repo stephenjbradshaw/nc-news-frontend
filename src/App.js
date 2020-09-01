@@ -13,7 +13,7 @@ function App() {
       <Router>
         <Articles path="/" />
         <Articles path="/articles/:topic" />
-        {/* <SingleArticle path="/article/:article_id" /> */}
+        <SingleArticle path="/article/:article_id" />
       </Router>
     </div>
   );
