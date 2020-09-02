@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
 import { VoteButton } from "../styled/lib";
+import { UserContext } from "../UserContext";
 
 class Voter extends Component {
+  static contextType = UserContext;
   state = { optimisticVotes: 0 };
 
   updateVote = (voteType) => {
@@ -37,10 +39,12 @@ class Voter extends Component {
   render() {
     const { votes } = this.props;
     const { optimisticVotes } = this.state;
+    const { user } = this.context;
 
     return (
       <aside>
         <VoteButton
+          disabled={!user}
           voted={optimisticVotes === 1}
           onClick={(event) => this.updateVote("up")}
         >
@@ -50,6 +54,7 @@ class Voter extends Component {
         </VoteButton>
         <p>{votes + optimisticVotes}</p>
         <VoteButton
+          disabled={!user}
           voted={optimisticVotes === -1}
           onClick={(event) => this.updateVote("down")}
         >

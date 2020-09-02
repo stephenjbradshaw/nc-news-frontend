@@ -3,8 +3,11 @@ import * as api from "../utils/api";
 import Loader from "./Loader";
 import CommentCard from "./CommentCard";
 import AddComment from "./AddComment";
+import { UserContext } from "../UserContext";
 
 class Comments extends Component {
+  static contextType = UserContext;
+
   state = {
     comments: [],
     isLoading: true,
@@ -49,6 +52,7 @@ class Comments extends Component {
   render() {
     const { comments, isLoading, sort, formIsVisible } = this.state;
     const { article_id } = this.props;
+    const { user } = this.context;
 
     if (isLoading) return <Loader />;
     return (
@@ -65,10 +69,11 @@ class Comments extends Component {
           <option value="most_votes">Most votes</option>
           <option value="least_votes">Least votes</option>
         </select>
-        <button onClick={this.handleShowForm}>
+        <button disabled={!user} onClick={this.handleShowForm}>
           {formIsVisible ? "Hide" : "Add comment..."}
         </button>
-        {formIsVisible && (
+        {!user && <p>Please log in to comment</p>}
+        {formIsVisible && user && (
           <AddComment
             renderNewComment={this.renderNewComment}
             article_id={article_id}

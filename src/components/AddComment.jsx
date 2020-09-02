@@ -12,11 +12,14 @@ class AddComment extends Component {
     const { renderNewComment } = this.props;
 
     submitEvent.preventDefault();
-    api
-      .postComment(article_id, "jessjelly", commentToAdd)
-      .then((newComment) => {
-        renderNewComment(newComment);
-      });
+
+    commentToAdd &&
+      api
+        .postComment(article_id, "jessjelly", commentToAdd)
+        .then((newComment) => {
+          renderNewComment(newComment);
+        });
+    this.setState({ commentToAdd: "" });
   };
 
   handleChange = ({ target: { value } }) => {

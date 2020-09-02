@@ -22,7 +22,7 @@ class SingleArticle extends Component {
     return (
       <main>
         <article>
-          <ArticleCard article={article} isListItem={false} />
+          <ArticleCard article={article} isSingleArticle />
         </article>
         <Comments article_id={article_id} />
       </main>
