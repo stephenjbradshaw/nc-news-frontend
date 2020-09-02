@@ -52,7 +52,7 @@ class Comments extends Component {
   render() {
     const { comments, isLoading, sort, formIsVisible } = this.state;
     const { article_id } = this.props;
-    const { user } = this.context;
+    const { user, toggleLogin } = this.context;
 
     if (isLoading) return <Loader />;
     return (
@@ -72,7 +72,11 @@ class Comments extends Component {
         <button disabled={!user} onClick={this.handleShowForm}>
           {formIsVisible ? "Hide" : "Add comment..."}
         </button>
-        {!user && <p>Please log in to comment</p>}
+        {!user && (
+          <p>
+            Please <button onClick={toggleLogin}>log in</button> to comment
+          </p>
+        )}
         {formIsVisible && user && (
           <AddComment
             renderNewComment={this.renderNewComment}

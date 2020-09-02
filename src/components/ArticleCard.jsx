@@ -25,7 +25,13 @@ const ArticleCard = ({ article, isSingleArticle }) => {
 
       <Voter kind={"article"} id={article.article_id} votes={article.votes} />
       <UserContext.Consumer>
-        {({ user }) => !user && <p>Please log in to vote</p>}
+        {({ user, toggleLogin }) =>
+          !user && (
+            <p>
+              Please <button onClick={toggleLogin}>log in</button> to vote
+            </p>
+          )
+        }
       </UserContext.Consumer>
       {isSingleArticle ? (
         <p>{article.comment_count} comments</p>
