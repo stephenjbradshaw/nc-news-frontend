@@ -42,8 +42,7 @@ class Comments extends Component {
     this.setState({ formIsVisible: !this.state.formIsVisible });
   };
 
-  addComment = (newComment) => {
-    console.log("addcomment called");
+  renderNewComment = (newComment) => {
     this.setState({ comments: [newComment, ...this.state.comments] });
   };
 
@@ -70,7 +69,10 @@ class Comments extends Component {
           {formIsVisible ? "Hide" : "Add comment..."}
         </button>
         {formIsVisible && (
-          <AddComment addComment={this.addComment} article_id={article_id} />
+          <AddComment
+            renderNewComment={this.renderNewComment}
+            article_id={article_id}
+          />
         )}
         <ul>
           {comments.map((comment) => {
