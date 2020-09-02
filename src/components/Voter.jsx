@@ -5,25 +5,6 @@ import { VoteButton } from "../styled/lib";
 class Voter extends Component {
   state = { optimisticVotes: 0 };
 
-  componentDidMount() {
-    const { kind, id } = this.props;
-    const retrievedOptimisticVotes = localStorage.getItem(
-      `${kind}_${id}_voteStatus`
-    );
-    if (retrievedOptimisticVotes) {
-      this.setState({ optimisticVotes: JSON.parse(retrievedOptimisticVotes) });
-    }
-  }
-
-  componentDidUpdate() {
-    const { kind, id } = this.props;
-    const { optimisticVotes } = this.state;
-    localStorage.setItem(
-      `${kind}_${id}_voteStatus`,
-      JSON.stringify(optimisticVotes)
-    );
-  }
-
   updateVote = (voteType) => {
     const { kind, id } = this.props;
     const { optimisticVotes } = this.state;
