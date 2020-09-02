@@ -67,7 +67,6 @@ export const getComments = (article_id, sort) => {
 };
 
 export const postComment = (article_id, username, body) => {
-  console.log(article_id, username, body);
   return axiosInstance
     .post(`/articles/${article_id}/comments`, { username, body })
     .then(({ data: { comment } }) => comment);

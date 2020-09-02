@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
+import { UserContext } from "../UserContext";
 
 class AddComment extends Component {
   state = { commentToAdd: "" };
+  static contextType = UserContext;
 
   handleSubmit = (submitEvent) => {
     const { commentToAdd } = this.state;
