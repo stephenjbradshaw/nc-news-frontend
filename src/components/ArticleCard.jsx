@@ -11,7 +11,7 @@ const ArticleCard = ({ article, isSingleArticle }) => {
   return (
     <>
       <p>
-        {article.topic} | Posted by {article.author} {timeString}
+        {article.topic} <br /> Posted by {article.author} {timeString}
       </p>
       {isSingleArticle ? (
         <h2>{article.title}</h2>

@@ -71,3 +71,7 @@ export const postComment = (article_id, username, body) => {
     .post(`/articles/${article_id}/comments`, { username, body })
     .then(({ data: { comment } }) => comment);
 };
+
+export const deleteComment = (comment_id) => {
+  return axiosInstance.delete(`/comments/${comment_id}`);
+};

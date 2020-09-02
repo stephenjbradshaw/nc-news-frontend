@@ -7,7 +7,7 @@ class Voter extends Component {
   static contextType = UserContext;
   state = { optimisticVotes: 0 };
 
-  updateVote = (voteType) => {
+  updateVoteOptimistic = (voteType) => {
     const { kind, id } = this.props;
     const { optimisticVotes } = this.state;
 
@@ -46,7 +46,7 @@ class Voter extends Component {
         <VoteButton
           disabled={!user}
           voted={optimisticVotes === 1}
-          onClick={(event) => this.updateVote("up")}
+          onClick={(event) => this.updateVoteOptimistic("up")}
         >
           <span role="img" aria-label="Up arrow">
             🔼
@@ -56,7 +56,7 @@ class Voter extends Component {
         <VoteButton
           disabled={!user}
           voted={optimisticVotes === -1}
-          onClick={(event) => this.updateVote("down")}
+          onClick={(event) => this.updateVoteOptimistic("down")}
         >
           <span role="img" aria-label="Down arrow">
             🔽

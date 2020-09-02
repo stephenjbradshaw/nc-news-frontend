@@ -49,6 +49,15 @@ class Comments extends Component {
     this.setState({ comments: [newComment, ...this.state.comments] });
   };
 
+  deleteCommentOptimistic = (comment_id) => {
+    const { comments } = this.state;
+    api.deleteComment(comment_id);
+    const filteredComments = comments.filter(
+      (comment) => comment.comment_id !== comment_id
+    );
+    this.setState({ comments: [...filteredComments] });
+  };
+
   render() {
     const { comments, isLoading, sort, formIsVisible } = this.state;
     const { article_id } = this.props;
@@ -87,7 +96,10 @@ class Comments extends Component {
           {comments.map((comment) => {
             return (
               <li key={comment.comment_id}>
-                <CommentCard comment={comment} />
+                <CommentCard
+                  comment={comment}
+                  deleteCommentOptimistic={this.deleteCommentOptimistic}
+                />
               </li>
             );
           })}
