@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import ArticleCard from "./ArticleCard";
 import * as api from "../utils/api";
 import Loader from "./Loader";
+import ErrorPage from "./ErrorPage";
 
 class Articles extends Component {
-  state = { articles: [], isLoading: true, sort: "newest" };
+  state = { articles: [], isLoading: true, sort: "newest", err: null };
 
   componentDidMount() {
     const { topic } = this.props;
-    this.fetchArticles(topic);
+    const { sort } = this.state;
+    this.fetchArticles(topic, sort);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -16,8 +18,7 @@ class Articles extends Component {
     const { sort } = this.state;
 
     if (prevProps.topic !== topic) {
-      this.setState({ sort: "newest" });
-      this.fetchArticles(topic);
+      this.fetchArticles(topic, sort);
     } else if (prevState.sort !== sort) {
       this.fetchArticles(topic, sort);
     }
@@ -25,9 +26,21 @@ class Articles extends Component {
 
   fetchArticles = (topic, sort) => {
     this.setState({ isLoading: true });
-    api.getArticles(topic, sort).then((articles) => {
-      this.setState({ articles, isLoading: false });
-    });
+    api
+      .getArticles(topic, sort)
+      .then((articles) => {
+        this.setState({ articles, isLoading: false });
+      })
+      .catch(({ response }) => {
+        this.setState({
+          isLoading: false,
+          err: {
+            type: "fetchArticles",
+            msg: response.data.msg,
+            status: response.status,
+          },
+        });
+      });
   };
 
   handleSortChange = (event) => {
@@ -36,8 +49,9 @@ class Articles extends Component {
   };
 
   render() {
-    const { articles, isLoading, sort } = this.state;
+    const { articles, isLoading, sort, err } = this.state;
     if (isLoading) return <Loader />;
+    if (err) return <ErrorPage {...err} />;
     return (
       <main>
         <label htmlFor="sort-by">Sort articles by: </label>

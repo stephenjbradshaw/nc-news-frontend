@@ -6,6 +6,7 @@ import Articles from "./components/Articles";
 import SingleArticle from "./components/SingleArticle";
 import { Router } from "@reach/router";
 import { UserContext } from "./UserContext";
+import ErrorPage from "./components/ErrorPage";
 
 class App extends Component {
   toggleLogin = () => {
@@ -16,6 +17,7 @@ class App extends Component {
   state = { user: null, toggleLogin: this.toggleLogin };
 
   render() {
+    const err = { type: "general404", msg: "Page not found!", status: 404 };
     return (
       <div className="App">
         <UserContext.Provider value={this.state}>
@@ -24,6 +26,7 @@ class App extends Component {
             <Articles path="/" />
             <Articles path="/articles/:topic" />
             <SingleArticle path="/article/:article_id" />
+            <ErrorPage default {...err} />
           </Router>
         </UserContext.Provider>
       </div>

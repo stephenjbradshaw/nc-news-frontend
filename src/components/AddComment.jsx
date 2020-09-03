@@ -1,23 +1,33 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
 import { UserContext } from "../UserContext";
+import ErrorPage from "../components/ErrorPage";
 
 class AddComment extends Component {
-  state = { commentToAdd: "" };
+  state = { commentToAdd: "", err: null };
   static contextType = UserContext;
 
   handleSubmit = (submitEvent) => {
     const { commentToAdd } = this.state;
-    const { article_id } = this.props;
-    const { renderNewComment } = this.props;
+    const { renderNewComment, article_id } = this.props;
+    const { user } = this.context;
 
     submitEvent.preventDefault();
 
     commentToAdd &&
       api
-        .postComment(article_id, "jessjelly", commentToAdd)
+        .postComment(article_id, user, commentToAdd)
         .then((newComment) => {
           renderNewComment(newComment);
+        })
+        .catch(({ response }) => {
+          this.setState({
+            err: {
+              type: "postComment",
+              msg: response.data.msg,
+              status: response.status,
+            },
+          });
         });
     this.setState({ commentToAdd: "" });
   };
@@ -27,7 +37,8 @@ class AddComment extends Component {
   };
 
   render() {
-    const { commentToAdd } = this.state;
+    const { commentToAdd, err } = this.state;
+    if (err) return <ErrorPage {...err} />;
     return (
       <form onSubmit={this.handleSubmit}>
         <label>

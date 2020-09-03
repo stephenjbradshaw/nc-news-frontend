@@ -17,7 +17,7 @@ const CommentCard = ({ comment, deleteCommentOptimistic }) => {
                 onClick={(event) => deleteCommentOptimistic(comment.comment_id)}
                 aria-label="Delete Comment"
               >
-                X
+                Delete Comment
               </button>
             );
         }}

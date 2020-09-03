@@ -1,17 +1,30 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
 import { Link } from "@reach/router";
+import ErrorPage from "./ErrorPage";
 
 class Nav extends Component {
-  state = { topics: [] };
+  state = { topics: [], err: null };
 
   componentDidMount() {
-    api.getTopics().then((topics) => {
-      this.setState({ topics });
-    });
+    api
+      .getTopics()
+      .then((topics) => {
+        this.setState({ topics });
+      })
+      .catch(({ response }) => {
+        this.setState({
+          err: {
+            type: "fetchTopics",
+            msg: response.data.msg,
+            status: response.status,
+          },
+        });
+      });
   }
   render() {
-    const { topics } = this.state;
+    const { topics, err } = this.state;
+    if (err) return <ErrorPage {...err} />;
     return (
       <nav>
         <ul>

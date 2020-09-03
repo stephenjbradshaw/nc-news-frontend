@@ -4,6 +4,7 @@ import Loader from "./Loader";
 import CommentCard from "./CommentCard";
 import AddComment from "./AddComment";
 import { UserContext } from "../UserContext";
+import ErrorPage from "./ErrorPage";
 
 class Comments extends Component {
   static contextType = UserContext;
@@ -12,11 +13,13 @@ class Comments extends Component {
     comments: [],
     isLoading: true,
     sort: "newest",
+    err: null,
   };
 
   componentDidMount() {
     const { article_id } = this.props;
-    this.fetchComments(article_id);
+    const { sort } = this.state;
+    this.fetchComments(article_id, sort);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -30,9 +33,21 @@ class Comments extends Component {
 
   fetchComments = (article_id, sort) => {
     this.setState({ isLoading: true });
-    api.getComments(article_id, sort).then((comments) => {
-      this.setState({ comments, isLoading: false });
-    });
+    api
+      .getComments(article_id, sort)
+      .then((comments) => {
+        this.setState({ comments, isLoading: false });
+      })
+      .catch(({ response }) => {
+        this.setState({
+          isLoading: false,
+          err: {
+            type: "fetchComments",
+            msg: response.data.msg,
+            status: response.status,
+          },
+        });
+      });
   };
 
   handleSortChange = (event) => {
@@ -46,7 +61,16 @@ class Comments extends Component {
 
   deleteCommentOptimistic = (comment_id) => {
     const { comments } = this.state;
-    api.deleteComment(comment_id);
+    api.deleteComment(comment_id).catch(({ response }) => {
+      this.setState({
+        isLoading: false,
+        err: {
+          type: "deleteComment",
+          msg: response.data.msg,
+          status: response.status,
+        },
+      });
+    });
     const filteredComments = comments.filter(
       (comment) => comment.comment_id !== comment_id
     );
@@ -54,11 +78,12 @@ class Comments extends Component {
   };
 
   render() {
-    const { comments, isLoading, sort } = this.state;
+    const { comments, isLoading, sort, err } = this.state;
     const { article_id } = this.props;
     const { user, toggleLogin } = this.context;
 
     if (isLoading) return <Loader />;
+    if (err) return <ErrorPage {...err} />;
     return (
       <section>
         <label htmlFor="sort-by">Sort comments by: </label>
