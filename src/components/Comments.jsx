@@ -12,7 +12,6 @@ class Comments extends Component {
     comments: [],
     isLoading: true,
     sort: "newest",
-    formIsVisible: false,
   };
 
   componentDidMount() {
@@ -41,10 +40,6 @@ class Comments extends Component {
     this.setState({ sort: value });
   };
 
-  handleShowForm = () => {
-    this.setState({ formIsVisible: !this.state.formIsVisible });
-  };
-
   renderNewComment = (newComment) => {
     this.setState({ comments: [newComment, ...this.state.comments] });
   };
@@ -59,7 +54,7 @@ class Comments extends Component {
   };
 
   render() {
-    const { comments, isLoading, sort, formIsVisible } = this.state;
+    const { comments, isLoading, sort } = this.state;
     const { article_id } = this.props;
     const { user, toggleLogin } = this.context;
 
@@ -78,15 +73,13 @@ class Comments extends Component {
           <option value="most_votes">Most votes</option>
           <option value="least_votes">Least votes</option>
         </select>
-        <button disabled={!user} onClick={this.handleShowForm}>
-          {formIsVisible ? "Hide" : "Add comment..."}
-        </button>
+
         {!user && (
           <p>
             Please <button onClick={toggleLogin}>log in</button> to comment
           </p>
         )}
-        {formIsVisible && user && (
+        {user && (
           <AddComment
             renderNewComment={this.renderNewComment}
             article_id={article_id}
