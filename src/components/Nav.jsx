@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
-import { Link } from "@reach/router";
 import ErrorPage from "./ErrorPage";
+import { Link } from "@reach/router";
+import { capitalizeFirstLetter } from "../utils/capitalize";
 
 class Nav extends Component {
   state = { topics: [], err: null };
@@ -24,17 +25,18 @@ class Nav extends Component {
   }
   render() {
     const { topics, err } = this.state;
+    const { className } = this.props;
     if (err) return <ErrorPage {...err} />;
     return (
-      <nav>
+      <nav className={className}>
         <ul>
           <Link to="/" key="home">
-            <button>all articles</button>
+            All Articles
           </Link>
           {topics.map((topic) => {
             return (
               <Link to={`/articles/${topic.slug}`} key={topic.slug}>
-                <button>{topic.slug}</button>
+                {capitalizeFirstLetter(topic.slug)}
               </Link>
             );
           })}

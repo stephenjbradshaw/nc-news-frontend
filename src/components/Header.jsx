@@ -1,13 +1,13 @@
 import React from "react";
-import Nav from "./Nav";
-import Login from "./Login";
+import { StyledNav } from "../styled/lib";
+import { StyledLogin } from "../styled/lib";
 
-const Header = () => {
+const Header = ({ className }) => {
   return (
-    <header>
-      <Login />
+    <header className={className}>
+      <StyledLogin />
       <h1>Northcoders News</h1>
-      <Nav />
+      <StyledNav />
     </header>
   );
 };

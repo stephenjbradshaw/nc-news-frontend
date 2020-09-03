@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import Header from "./components/Header";
 import Articles from "./components/Articles";
 import SingleArticle from "./components/SingleArticle";
 import { Router } from "@reach/router";
 import { UserContext } from "./UserContext";
 import ErrorPage from "./components/ErrorPage";
+import { StyledHeader } from "./styled/lib";
 
 class App extends Component {
   toggleLogin = () => {
@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div className="App">
         <UserContext.Provider value={this.state}>
-          <Header />
+          <StyledHeader />
           <Router>
             <Articles path="/" />
             <Articles path="/articles/:topic" />
