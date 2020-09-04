@@ -15,6 +15,7 @@ class Comments extends Component {
     sort: "newest",
     err: null,
   };
+  select = React.createRef();
 
   componentDidMount() {
     const { article_id } = this.props;
@@ -24,7 +25,11 @@ class Comments extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { sort } = this.state;
-    const { article_id } = this.props;
+    const { article_id, location } = this.props;
+
+    if (this.select.current && location.state.fromCommentsLink) {
+      this.select.current.scrollIntoView({ behavior: "smooth" });
+    }
 
     if (prevState.sort !== sort) {
       this.fetchComments(article_id, sort);
@@ -88,6 +93,7 @@ class Comments extends Component {
       <section>
         <label htmlFor="sort-by">Sort comments by: </label>
         <select
+          ref={this.select}
           name="sort_by"
           id="sort_by"
           value={sort}

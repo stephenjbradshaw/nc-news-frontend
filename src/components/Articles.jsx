@@ -50,7 +50,6 @@ class Articles extends Component {
 
   render() {
     const { articles, isLoading, sort, err } = this.state;
-    if (isLoading) return <Loader />;
     if (err) return <ErrorPage {...err} />;
     return (
       <main>
@@ -68,15 +67,19 @@ class Articles extends Component {
           <option value="most_votes">Most votes</option>
           <option value="least_votes">Least votes</option>
         </select>
-        <ul>
-          {articles.map((article) => {
-            return (
-              <ul key={article.article_id}>
-                <ArticleCard article={article} />
-              </ul>
-            );
-          })}
-        </ul>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <ul>
+            {articles.map((article) => {
+              return (
+                <ul key={article.article_id}>
+                  <ArticleCard article={article} />
+                </ul>
+              );
+            })}
+          </ul>
+        )}
       </main>
     );
   }

@@ -1,7 +1,6 @@
 import React from "react";
 import Voter from "./Voter";
 import { formatTimeString } from "../utils/time";
-import { UserContext } from "../UserContext";
 
 const ArticleCard = ({ article }) => {
   const timeDifference = Date.now() - new Date(article.created_at);

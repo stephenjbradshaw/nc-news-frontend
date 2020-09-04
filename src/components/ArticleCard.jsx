@@ -2,7 +2,6 @@ import React from "react";
 import Voter from "./Voter";
 import { Link } from "@reach/router";
 import { formatTimeString } from "../utils/time";
-import { UserContext } from "../UserContext";
 
 const ArticleCard = ({ article }) => {
   const timeDifference = Date.now() - new Date(article.created_at);
@@ -17,11 +16,22 @@ const ArticleCard = ({ article }) => {
         <h2>{article.title}</h2>
       </Link>
 
-      <p>{article.body}</p>
+      {article.body.length > 100 ? (
+        <p>
+          {article.body.slice(0, 100) + "... "}
+
+          <Link to={`/article/${article.article_id}`}>Read more</Link>
+        </p>
+      ) : (
+        article.body
+      )}
 
       <Voter kind={"article"} id={article.article_id} votes={article.votes} />
 
-      <Link to={`/article/${article.article_id}`}>
+      <Link
+        to={`/article/${article.article_id}`}
+        state={{ fromCommentsLink: true }}
+      >
         <p>{article.comment_count} comments</p>
       </Link>
     </article>

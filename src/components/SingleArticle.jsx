@@ -29,14 +29,14 @@ class SingleArticle extends Component {
 
   render() {
     const { article, isLoading, err } = this.state;
-    const { article_id } = this.props;
+    const { article_id, location } = this.props;
 
     if (isLoading) return <Loader />;
     if (err) return <ErrorPage {...err} />;
     return (
       <main>
         <SingleArticleCard article={article} />
-        <Comments article_id={article_id} />
+        <Comments article_id={article_id} location={location} />
       </main>
     );
   }
