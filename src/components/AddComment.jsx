@@ -45,7 +45,7 @@ class AddComment extends Component {
           Comment:{" "}
           <textarea
             type="text"
-            maxlength="280"
+            maxLength="280"
             placeholder="Write a comment..."
             value={commentToAdd}
             onChange={this.handleChange}
