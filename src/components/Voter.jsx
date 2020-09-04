@@ -56,7 +56,7 @@ class Voter extends Component {
 
     if (err) return <ErrorPage {...err} />;
     return (
-      <aside>
+      <section>
         <VoteButton
           disabled={!user}
           voted={optimisticVotes === 1}
@@ -76,7 +76,16 @@ class Voter extends Component {
             🔽
           </span>
         </VoteButton>
-      </aside>
+        <UserContext.Consumer>
+          {({ user, toggleLogin }) =>
+            !user && (
+              <p>
+                Please <button onClick={toggleLogin}>log in</button> to vote
+              </p>
+            )
+          }
+        </UserContext.Consumer>
+      </section>
     );
   }
 }

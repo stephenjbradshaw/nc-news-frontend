@@ -71,9 +71,9 @@ class Articles extends Component {
         <ul>
           {articles.map((article) => {
             return (
-              <article key={article.article_id}>
+              <ul key={article.article_id}>
                 <ArticleCard article={article} />
-              </article>
+              </ul>
             );
           })}
         </ul>

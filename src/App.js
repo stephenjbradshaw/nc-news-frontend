@@ -9,18 +9,20 @@ import ErrorPage from "./components/ErrorPage";
 import { StyledHeader } from "./styled/lib";
 
 class App extends Component {
+  state = { user: null, toggleLogin: this.toggleLogin };
+
   toggleLogin = () => {
     if (this.state.user) this.setState({ user: null });
     else this.setState({ user: "jessjelly" });
   };
 
-  state = { user: null, toggleLogin: this.toggleLogin };
-
   render() {
     const err = { type: "general404", msg: "Page not found!", status: 404 };
     return (
       <div className="App">
-        <UserContext.Provider value={this.state}>
+        <UserContext.Provider
+          value={{ user: this.state.user, toggleLogin: this.toggleLogin }}
+        >
           <StyledHeader />
           <Router>
             <Articles path="/" />

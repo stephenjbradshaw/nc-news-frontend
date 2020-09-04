@@ -43,12 +43,13 @@ class AddComment extends Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Comment:{" "}
-          <input
+          <textarea
             type="text"
+            maxlength="280"
             placeholder="Write a comment..."
             value={commentToAdd}
             onChange={this.handleChange}
-          ></input>
+          ></textarea>
         </label>
         <button type="submit">Submit</button>
       </form>

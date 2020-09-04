@@ -35,9 +35,7 @@ class SingleArticle extends Component {
     if (err) return <ErrorPage {...err} />;
     return (
       <main>
-        <article>
-          <SingleArticleCard article={article} />
-        </article>
+        <SingleArticleCard article={article} />
         <Comments article_id={article_id} />
       </main>
     );

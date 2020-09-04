@@ -3,18 +3,21 @@ import { Link } from "@reach/router";
 
 const ErrorPage = (err) => {
   const { type, msg, status } = err;
+  const errRef = {
+    general404: "Couldn't find that page!",
+    fetchTopics: "Could not fetch any topics.",
+    fetchArticles: "Could not fetch any articles.",
+    fetchSingleArticle: "Could not fetch the article.",
+    updateVotes: "Your vote could not be added.",
+    fetchComments: "Could not fetch any comments.",
+    postComment: "Your comment could not be posted.",
+    deleteComment: "Your comment could not be deleted.",
+  };
+
   return (
     <header>
       <p>
-        Sorry! {type === "general404" && "Couldn't find that page! "}
-        {type === "fetchTopics" && "Could not fetch any topics. "}
-        {type === "fetchArticles" && "Could not fetch any articles. "}
-        {type === "fetchSingleArticle" && "Could not fetch the article. "}
-        {type === "updateVotes" && "Your vote could not be added. "}
-        {type === "fetchComments" && "Could not fetch any comments. "}
-        {type === "postComment" && "Your comment could not be posted. "}
-        {type === "deleteComment" && "Your comment could not be deleted. "}
-        Here's some more information: <br />
+        Sorry! {errRef[type]} Here's some more information: <br />
       </p>
       <p>
         Status: {status} | Message: {msg}

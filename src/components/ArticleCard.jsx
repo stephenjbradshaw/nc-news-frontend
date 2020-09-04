@@ -9,7 +9,7 @@ const ArticleCard = ({ article }) => {
   const timeString = formatTimeString(timeDifference);
 
   return (
-    <>
+    <article>
       <p>
         {article.topic} <br /> Posted by {article.author} {timeString}
       </p>
@@ -20,20 +20,11 @@ const ArticleCard = ({ article }) => {
       <p>{article.body}</p>
 
       <Voter kind={"article"} id={article.article_id} votes={article.votes} />
-      <UserContext.Consumer>
-        {({ user, toggleLogin }) =>
-          !user && (
-            <p>
-              Please <button onClick={toggleLogin}>log in</button> to vote
-            </p>
-          )
-        }
-      </UserContext.Consumer>
 
       <Link to={`/article/${article.article_id}`}>
         <p>{article.comment_count} comments</p>
       </Link>
-    </>
+    </article>
   );
 };
 
