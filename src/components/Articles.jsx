@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import ArticleCard from "./ArticleCard";
 import * as api from "../utils/api";
 import Loader from "./Loader";
 import ErrorPage from "./ErrorPage";
+import { StyledSortArticles } from "../styled/lib";
+import { StyledArticlesList } from "../styled/lib";
 
 class Articles extends Component {
   state = { articles: [], isLoading: true, sort: "newest", err: null };
@@ -53,33 +54,11 @@ class Articles extends Component {
     if (err) return <ErrorPage {...err} />;
     return (
       <main>
-        <label htmlFor="sort-by">Sort articles by: </label>
-        <select
-          name="sort-by"
-          id="sort-by"
-          value={sort}
-          onChange={this.handleSortChange}
-        >
-          <option value="newest">Newest</option>
-          <option value="oldest">Oldest</option>
-          <option value="most_comments">Most comments</option>
-          <option value="least_comments">Least comments</option>
-          <option value="most_votes">Most votes</option>
-          <option value="least_votes">Least votes</option>
-        </select>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <ul>
-            {articles.map((article) => {
-              return (
-                <ul key={article.article_id}>
-                  <ArticleCard article={article} />
-                </ul>
-              );
-            })}
-          </ul>
-        )}
+        <StyledSortArticles
+          handleSortChange={this.handleSortChange}
+          sort={sort}
+        />
+        {isLoading ? <Loader /> : <StyledArticlesList articles={articles} />}
       </main>
     );
   }

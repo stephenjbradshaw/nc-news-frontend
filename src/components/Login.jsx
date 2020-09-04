@@ -1,5 +1,6 @@
 import React from "react";
 import { UserContext } from "../UserContext";
+import { StyledButton } from "../styled/lib";
 
 const Login = ({ className }) => {
   return (
@@ -7,7 +8,9 @@ const Login = ({ className }) => {
       {({ user, toggleLogin }) => (
         <p className={className}>
           {user ? `Logged in as: ${user} ` : "You are not logged in "}
-          <button onClick={toggleLogin}>{user ? "Log out" : "Log in"}</button>
+          <StyledButton as="button" onClick={toggleLogin}>
+            {user ? "Log out" : "Log in"}
+          </StyledButton>
         </p>
       )}
     </UserContext.Consumer>
