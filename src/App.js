@@ -12,8 +12,10 @@ class App extends Component {
   state = { user: null, toggleLogin: this.toggleLogin };
 
   toggleLogin = () => {
-    if (this.state.user) this.setState({ user: null });
-    else this.setState({ user: "jessjelly" });
+    this.setState(({ user }) => {
+      if (user) return { user: null };
+      else return { user: "jessjelly" };
+    });
   };
 
   render() {
