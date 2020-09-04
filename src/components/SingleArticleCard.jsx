@@ -1,6 +1,5 @@
 import React from "react";
 import Voter from "./Voter";
-import { Link } from "@reach/router";
 import { formatTimeString } from "../utils/time";
 import { UserContext } from "../UserContext";
 
@@ -13,9 +12,7 @@ const ArticleCard = ({ article }) => {
       <p>
         {article.topic} <br /> Posted by {article.author} {timeString}
       </p>
-      <Link to={`/article/${article.article_id}`}>
-        <h2>{article.title}</h2>
-      </Link>
+      <h2>{article.title}</h2>
 
       <p>{article.body}</p>
 
@@ -30,9 +27,7 @@ const ArticleCard = ({ article }) => {
         }
       </UserContext.Consumer>
 
-      <Link to={`/article/${article.article_id}`}>
-        <p>{article.comment_count} comments</p>
-      </Link>
+      <p>{article.comment_count} comments</p>
     </>
   );
 };
