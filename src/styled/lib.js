@@ -9,6 +9,8 @@ import ArticlesList from "../components/ArticlesList";
 import VoteButton from "../components/VoteButton";
 import SingleArticleCard from "../components/SingleArticleCard";
 import SortComments from "../components/SortComments";
+import CommentsList from "../components/CommentsList";
+import CommentCard from "../components/CommentCard";
 
 export const AppTitle = styled.h1`
   text-align: center;
@@ -71,13 +73,11 @@ export const StyledArticlesList = styled(ArticlesList)`
 
 // <li>
 export const StyledArticleCard = styled(ArticleCard)`
-  max-width: 400px;
-  min-width: 200px;
+  width: 320px;
   list-style-type: none;
   text-align: center;
   margin: 1em;
   padding: 1em;
-
   border-radius: 10px;
   background-color: white;
   box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.5);
@@ -87,20 +87,39 @@ export const StyledArticleCard = styled(ArticleCard)`
 export const StyledSingleArticleCard = styled(SingleArticleCard)`
   max-width: 80%;
   min-width: 200px;
-
   list-style-type: none;
   text-align: center;
   margin: 1em auto 1em auto;
   padding: 1em;
-
   border-radius: 10px;
   background-color: white;
   box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.5);
 `;
 
+// <Section>
 export const StyledSortComments = styled(SortComments)`
   text-align: center;
   margin: 1em;
+`;
+
+// <ul>
+export const StyledCommentsList = styled(CommentsList)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+`;
+
+// <li>
+export const StyledCommentCard = styled(CommentCard)`
+  width: 350px;
+  list-style-type: none;
+  text-align: center;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.5);
 `;
 
 export const StyledVoteButton = styled(VoteButton)`
