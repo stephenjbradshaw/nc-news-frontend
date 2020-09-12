@@ -120,6 +120,7 @@ export const StyledCommentCard = styled(CommentCard)`
   border-radius: 10px;
   background-color: white;
   box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.5);
+  word-break: break-all;
 `;
 
 export const StyledVoteButton = styled(VoteButton)`

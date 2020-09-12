@@ -6,6 +6,7 @@ import { UserContext } from "../UserContext";
 import ErrorPage from "./ErrorPage";
 import { StyledSortComments } from "../styled/lib";
 import { StyledCommentsList } from "../styled/lib";
+import CommentLogin from "./CommentLogin";
 
 class Comments extends Component {
   static contextType = UserContext;
@@ -97,17 +98,15 @@ class Comments extends Component {
           sort={sort}
           ref={this.ref}
         />
-        {!user && (
-          <p>
-            Please <button onClick={toggleLogin}>log in</button> to comment
-          </p>
-        )}
-        {user && (
+        {user ? (
           <AddComment
             renderNewComment={this.renderNewComment}
             article_id={article_id}
           />
+        ) : (
+          <CommentLogin toggleLogin={toggleLogin} />
         )}
+
         <StyledCommentsList
           comments={comments}
           deleteCommentOptimistic={this.deleteCommentOptimistic}
