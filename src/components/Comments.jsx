@@ -5,7 +5,7 @@ import CommentCard from "./CommentCard";
 import AddComment from "./AddComment";
 import { UserContext } from "../UserContext";
 import ErrorPage from "./ErrorPage";
-import SortComments from "./SortComments";
+import { StyledSortComments } from "../styled/lib";
 
 class Comments extends Component {
   static contextType = UserContext;
@@ -92,7 +92,7 @@ class Comments extends Component {
     if (err) return <ErrorPage {...err} />;
     return (
       <section>
-        <SortComments
+        <StyledSortComments
           handleSortChange={this.handleSortChange}
           sort={sort}
           ref={this.ref}

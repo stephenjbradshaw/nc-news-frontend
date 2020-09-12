@@ -8,6 +8,7 @@ import ArticleCard from "../components/ArticleCard";
 import ArticlesList from "../components/ArticlesList";
 import VoteButton from "../components/VoteButton";
 import SingleArticleCard from "../components/SingleArticleCard";
+import SortComments from "../components/SortComments";
 
 export const AppTitle = styled.h1`
   text-align: center;
@@ -95,6 +96,11 @@ export const StyledSingleArticleCard = styled(SingleArticleCard)`
   border-radius: 10px;
   background-color: white;
   box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.5);
+`;
+
+export const StyledSortComments = styled(SortComments)`
+  text-align: center;
+  margin: 1em;
 `;
 
 export const StyledVoteButton = styled(VoteButton)`
