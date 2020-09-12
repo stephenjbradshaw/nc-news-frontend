@@ -5,6 +5,7 @@ import CommentCard from "./CommentCard";
 import AddComment from "./AddComment";
 import { UserContext } from "../UserContext";
 import ErrorPage from "./ErrorPage";
+import SortComments from "./SortComments";
 
 class Comments extends Component {
   static contextType = UserContext;
@@ -15,7 +16,7 @@ class Comments extends Component {
     sort: "newest",
     err: null,
   };
-  select = React.createRef();
+  ref = React.createRef();
 
   componentDidMount() {
     const { article_id } = this.props;
@@ -27,8 +28,8 @@ class Comments extends Component {
     const { sort } = this.state;
     const { article_id, location } = this.props;
 
-    if (this.select.current && location.state.fromCommentsLink) {
-      this.select.current.scrollIntoView({ behavior: "smooth" });
+    if (this.ref.current && location.state.fromCommentsLink) {
+      this.ref.current.scrollIntoView({ behavior: "smooth" });
     }
 
     if (prevState.sort !== sort) {
@@ -91,20 +92,11 @@ class Comments extends Component {
     if (err) return <ErrorPage {...err} />;
     return (
       <section>
-        <label htmlFor="sort-by">Sort comments by: </label>
-        <select
-          ref={this.select}
-          name="sort_by"
-          id="sort_by"
-          value={sort}
-          onChange={this.handleSortChange}
-        >
-          <option value="newest">Newest</option>
-          <option value="oldest">Oldest</option>
-          <option value="most_votes">Most votes</option>
-          <option value="least_votes">Least votes</option>
-        </select>
-
+        <SortComments
+          handleSortChange={this.handleSortChange}
+          sort={sort}
+          ref={this.ref}
+        />
         {!user && (
           <p>
             Please <button onClick={toggleLogin}>log in</button> to comment
