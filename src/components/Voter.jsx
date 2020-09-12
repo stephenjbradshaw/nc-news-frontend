@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
-import { VoteButton } from "../styled/lib";
+import { StyledVoteButton } from "../styled/lib";
 import { UserContext } from "../UserContext";
 import ErrorPage from "./ErrorPage";
 
@@ -52,39 +52,30 @@ class Voter extends Component {
   render() {
     const { votes } = this.props;
     const { optimisticVotes, err } = this.state;
-    const { user } = this.context;
+    const { user, toggleLogin } = this.context;
 
     if (err) return <ErrorPage {...err} />;
     return (
       <section>
-        <VoteButton
-          disabled={!user}
+        <StyledVoteButton
+          kind="up"
+          optimisticVotes={optimisticVotes}
+          updateVoteOptimistic={this.updateVoteOptimistic}
           voted={optimisticVotes === 1}
-          onClick={(event) => this.updateVoteOptimistic("up")}
-        >
-          <span role="img" aria-label="Up arrow">
-            🔼
-          </span>
-        </VoteButton>
+        ></StyledVoteButton>
         <p>{votes + optimisticVotes}</p>
-        <VoteButton
-          disabled={!user}
+        <StyledVoteButton
+          kind="down"
+          optimisticVotes={optimisticVotes}
+          updateVoteOptimistic={this.updateVoteOptimistic}
           voted={optimisticVotes === -1}
-          onClick={(event) => this.updateVoteOptimistic("down")}
-        >
-          <span role="img" aria-label="Down arrow">
-            🔽
-          </span>
-        </VoteButton>
-        <UserContext.Consumer>
-          {({ user, toggleLogin }) =>
-            !user && (
-              <p>
-                Please <button onClick={toggleLogin}>log in</button> to vote
-              </p>
-            )
-          }
-        </UserContext.Consumer>
+        ></StyledVoteButton>
+
+        {!user && (
+          <p>
+            Please <button onClick={toggleLogin}>log in</button> to vote
+          </p>
+        )}
       </section>
     );
   }

@@ -6,6 +6,7 @@ import { Link } from "@reach/router";
 import SortArticles from "../components/SortArticles";
 import ArticleCard from "../components/ArticleCard";
 import ArticlesList from "../components/ArticlesList";
+import VoteButton from "../components/VoteButton";
 
 export const AppTitle = styled.h1`
   text-align: center;
@@ -80,6 +81,8 @@ export const StyledArticleCard = styled(ArticleCard)`
   box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.5);
 `;
 
-export const VoteButton = styled.button`
+export const StyledVoteButton = styled(VoteButton)`
+  height: 80px;
+  width: 80px;
   background: ${(props) => (props.voted ? "grey" : "")};
 `;
