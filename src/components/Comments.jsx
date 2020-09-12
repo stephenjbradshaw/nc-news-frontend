@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
 import Loader from "./Loader";
-import AddComment from "./AddComment";
+import { StyledAddComment } from "../styled/lib";
 import { UserContext } from "../UserContext";
 import ErrorPage from "./ErrorPage";
 import { StyledSortComments } from "../styled/lib";
@@ -99,7 +99,7 @@ class Comments extends Component {
           ref={this.ref}
         />
         {user ? (
-          <AddComment
+          <StyledAddComment
             renderNewComment={this.renderNewComment}
             article_id={article_id}
           />

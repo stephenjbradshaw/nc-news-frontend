@@ -11,6 +11,7 @@ import SingleArticleCard from "../components/SingleArticleCard";
 import SortComments from "../components/SortComments";
 import CommentsList from "../components/CommentsList";
 import CommentCard from "../components/CommentCard";
+import AddComment from "../components/AddComment";
 
 export const AppTitle = styled.h1`
   text-align: center;
@@ -100,6 +101,18 @@ export const StyledSingleArticleCard = styled(SingleArticleCard)`
 export const StyledSortComments = styled(SortComments)`
   text-align: center;
   margin: 1em;
+`;
+
+// <Form>
+export const StyledAddComment = styled(AddComment)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  textarea {
+    margin-left: 0.5em;
+    margin-right: 0.2em;
+  }
 `;
 
 // <ul>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as api from "../utils/api";
 import { UserContext } from "../UserContext";
 import ErrorPage from "../components/ErrorPage";
+import { StyledButton } from "../styled/lib";
 
 class AddComment extends Component {
   state = { commentToAdd: "", err: null };
@@ -38,20 +39,22 @@ class AddComment extends Component {
 
   render() {
     const { commentToAdd, err } = this.state;
+    const { className } = this.props;
     if (err) return <ErrorPage {...err} />;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Comment:{" "}
-          <textarea
-            type="text"
-            maxLength="280"
-            placeholder="Write a comment..."
-            value={commentToAdd}
-            onChange={this.handleChange}
-          ></textarea>
-        </label>
-        <button type="submit">Submit</button>
+      <form className={className} onSubmit={this.handleSubmit}>
+        <label for="comment">Comment: </label>
+        <textarea
+          id="comment"
+          type="text"
+          maxLength="280"
+          placeholder="Write a comment..."
+          value={commentToAdd}
+          onChange={this.handleChange}
+        ></textarea>
+        <StyledButton as="button" type="submit">
+          Submit
+        </StyledButton>
       </form>
     );
   }
