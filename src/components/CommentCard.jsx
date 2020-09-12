@@ -3,12 +3,12 @@ import Voter from "./Voter";
 import { formatTimeString } from "../utils/time";
 import { UserContext } from "../UserContext";
 
-const CommentCard = ({ comment, deleteCommentOptimistic }) => {
+const CommentCard = ({ comment, deleteCommentOptimistic, className }) => {
   const timeDifference = Date.now() - new Date(comment.created_at);
   const timeString = formatTimeString(timeDifference);
 
   return (
-    <>
+    <li className={className}>
       <UserContext.Consumer>
         {({ user }) => {
           if (user === comment.author)
@@ -26,7 +26,7 @@ const CommentCard = ({ comment, deleteCommentOptimistic }) => {
       </p>
       <p>{comment.body}</p>
       <Voter kind={"comment"} id={comment.comment_id} votes={comment.votes} />
-    </>
+    </li>
   );
 };
 

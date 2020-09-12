@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
 import Loader from "./Loader";
-import CommentCard from "./CommentCard";
 import AddComment from "./AddComment";
 import { UserContext } from "../UserContext";
 import ErrorPage from "./ErrorPage";
 import { StyledSortComments } from "../styled/lib";
+import { StyledCommentsList } from "../styled/lib";
 
 class Comments extends Component {
   static contextType = UserContext;
@@ -108,18 +108,10 @@ class Comments extends Component {
             article_id={article_id}
           />
         )}
-        <ul>
-          {comments.map((comment) => {
-            return (
-              <li key={comment.comment_id}>
-                <CommentCard
-                  comment={comment}
-                  deleteCommentOptimistic={this.deleteCommentOptimistic}
-                />
-              </li>
-            );
-          })}
-        </ul>
+        <StyledCommentsList
+          comments={comments}
+          deleteCommentOptimistic={this.deleteCommentOptimistic}
+        />
       </section>
     );
   }
