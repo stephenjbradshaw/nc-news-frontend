@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
 import { StyledVoteButton } from "../styled/lib";
+import { StyledButton } from "../styled/lib";
 import { UserContext } from "../UserContext";
 import ErrorPage from "./ErrorPage";
 
@@ -73,7 +74,11 @@ class Voter extends Component {
 
         {!user && (
           <p>
-            Please <button onClick={toggleLogin}>log in</button> to vote
+            Please{" "}
+            <StyledButton as="button" onClick={toggleLogin}>
+              log in
+            </StyledButton>{" "}
+            to vote
           </p>
         )}
       </section>

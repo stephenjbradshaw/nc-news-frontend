@@ -7,6 +7,7 @@ import SortArticles from "../components/SortArticles";
 import ArticleCard from "../components/ArticleCard";
 import ArticlesList from "../components/ArticlesList";
 import VoteButton from "../components/VoteButton";
+import SingleArticleCard from "../components/SingleArticleCard";
 
 export const AppTitle = styled.h1`
   text-align: center;
@@ -74,6 +75,21 @@ export const StyledArticleCard = styled(ArticleCard)`
   list-style-type: none;
   text-align: center;
   margin: 1em;
+  padding: 1em;
+
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.5);
+`;
+
+// <Article>
+export const StyledSingleArticleCard = styled(SingleArticleCard)`
+  max-width: 80%;
+  min-width: 200px;
+
+  list-style-type: none;
+  text-align: center;
+  margin: 1em auto 1em auto;
   padding: 1em;
 
   border-radius: 10px;

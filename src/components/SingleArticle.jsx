@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SingleArticleCard from "./SingleArticleCard";
+import { StyledSingleArticleCard } from "../styled/lib";
 import Loader from "./Loader";
 import * as api from "../utils/api";
 import Comments from "./Comments";
@@ -35,7 +35,7 @@ class SingleArticle extends Component {
     if (err) return <ErrorPage {...err} />;
     return (
       <main>
-        <SingleArticleCard article={article} />
+        <StyledSingleArticleCard article={article} />
         <Comments article_id={article_id} location={location} />
       </main>
     );
