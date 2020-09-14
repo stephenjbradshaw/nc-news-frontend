@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
-import Loader from "./Loader";
+import { StyledLoader } from "../styled/lib";
 import { StyledAddComment } from "../styled/lib";
 import { UserContext } from "../UserContext";
 import ErrorPage from "./ErrorPage";
@@ -89,7 +89,7 @@ class Comments extends Component {
     const { article_id } = this.props;
     const { user, toggleLogin } = this.context;
 
-    if (isLoading) return <Loader />;
+    if (isLoading) return <StyledLoader />;
     if (err) return <ErrorPage {...err} />;
     return (
       <section>

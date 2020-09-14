@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../utils/api";
-import Loader from "./Loader";
+import { StyledLoader } from "../styled/lib";
 import ErrorPage from "./ErrorPage";
 import { StyledSortArticles } from "../styled/lib";
 import { StyledArticlesList } from "../styled/lib";
@@ -52,13 +52,18 @@ class Articles extends Component {
   render() {
     const { articles, isLoading, sort, err } = this.state;
     if (err) return <ErrorPage {...err} />;
+
     return (
       <main>
         <StyledSortArticles
           handleSortChange={this.handleSortChange}
           sort={sort}
         />
-        {isLoading ? <Loader /> : <StyledArticlesList articles={articles} />}
+        {isLoading ? (
+          <StyledLoader />
+        ) : (
+          <StyledArticlesList articles={articles} />
+        )}
       </main>
     );
   }

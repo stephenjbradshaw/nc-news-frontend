@@ -1,7 +1,7 @@
 import React from "react";
 
-const Loader = () => {
-  return <p>Loading...</p>;
+const StyledLoader = ({ className }) => {
+  return <div aria-label="Loading" className={className}></div>;
 };
 
-export default Loader;
+export default StyledLoader;

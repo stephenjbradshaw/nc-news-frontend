@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyledSingleArticleCard } from "../styled/lib";
-import Loader from "./Loader";
+import { StyledLoader } from "../styled/lib";
 import * as api from "../utils/api";
 import Comments from "./Comments";
 import ErrorPage from "./ErrorPage";
@@ -31,7 +31,7 @@ class SingleArticle extends Component {
     const { article, isLoading, err } = this.state;
     const { article_id, location } = this.props;
 
-    if (isLoading) return <Loader />;
+    if (isLoading) return <StyledLoader />;
     if (err) return <ErrorPage {...err} />;
     return (
       <main>

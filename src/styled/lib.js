@@ -14,6 +14,7 @@ import CommentCard from "../components/CommentCard";
 import AddComment from "../components/AddComment";
 import CommentLogin from "../components/CommentLogin";
 import Voter from "../components/Voter";
+import Loader from "../components/Loader";
 
 export const AppTitle = styled.h1`
   text-align: center;
@@ -181,4 +182,24 @@ export const StyledVoteButton = styled(VoteButton)`
   height: 80px;
   width: 80px;
   background: ${(props) => (props.voted ? "grey" : "")};
+`;
+
+export const StyledLoader = styled(Loader)`
+  text-align: center;
+  border: 10px solid white;
+  border-top: 10px solid blue;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 1em auto;
+  animation: spin 1.5s linear infinite;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 `;
