@@ -1,5 +1,5 @@
 import React from "react";
-import Voter from "./Voter";
+import { StyledVoter } from "../styled/lib";
 import { formatTimeString } from "../utils/time";
 
 const ArticleCard = ({ article, className }) => {
@@ -15,7 +15,11 @@ const ArticleCard = ({ article, className }) => {
 
       <p>{article.body}</p>
 
-      <Voter kind={"article"} id={article.article_id} votes={article.votes} />
+      <StyledVoter
+        kind={"article"}
+        id={article.article_id}
+        votes={article.votes}
+      />
 
       <p>{article.comment_count} comments</p>
     </article>

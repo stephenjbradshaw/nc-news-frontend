@@ -6,7 +6,7 @@ const CommentLogin = ({ toggleLogin, className }) => {
     <p className={className}>
       Please{" "}
       <StyledButton as="button" onClick={toggleLogin}>
-        log in
+        Log in
       </StyledButton>{" "}
       to comment
     </p>

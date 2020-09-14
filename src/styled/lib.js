@@ -173,7 +173,7 @@ export const StyledDeleteCommentButton = styled(StyledButton)`
 
 export const StyledVoter = styled(Voter)`
   p {
-    margin: 0;
+    margin: 0.3em;
   }
 `;
 

@@ -1,5 +1,5 @@
 import React from "react";
-import Voter from "./Voter";
+import { StyledVoter } from "../styled/lib";
 import { StyledLink } from "../styled/lib";
 import { formatTimeString } from "../utils/time";
 import { capitalizeFirstLetter } from "../utils/capitalize";
@@ -31,7 +31,11 @@ const ArticleCard = ({ article, className }) => {
           article.body
         )}
 
-        <Voter kind={"article"} id={article.article_id} votes={article.votes} />
+        <StyledVoter
+          kind={"article"}
+          id={article.article_id}
+          votes={article.votes}
+        />
 
         <StyledLink
           to={`/article/${article.article_id}`}

@@ -1,8 +1,7 @@
 import React from "react";
-import Voter from "./Voter";
+import { StyledVoter } from "../styled/lib";
 import { formatTimeString } from "../utils/time";
 import { UserContext } from "../UserContext";
-import { StyledButton } from "../styled/lib";
 import { StyledDeleteCommentButton } from "../styled/lib";
 
 const CommentCard = ({ comment, deleteCommentOptimistic, className }) => {
@@ -28,7 +27,11 @@ const CommentCard = ({ comment, deleteCommentOptimistic, className }) => {
         Posted by {comment.author} {timeString}
       </p>
       <p>{comment.body}</p>
-      <Voter kind={"comment"} id={comment.comment_id} votes={comment.votes} />
+      <StyledVoter
+        kind={"comment"}
+        id={comment.comment_id}
+        votes={comment.votes}
+      />
     </li>
   );
 };

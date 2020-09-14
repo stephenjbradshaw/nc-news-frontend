@@ -51,13 +51,13 @@ class Voter extends Component {
   };
 
   render() {
-    const { votes } = this.props;
+    const { votes, className } = this.props;
     const { optimisticVotes, err } = this.state;
     const { user, toggleLogin } = this.context;
 
     if (err) return <ErrorPage {...err} />;
     return (
-      <section>
+      <section className={className}>
         <StyledVoteButton
           kind="up"
           optimisticVotes={optimisticVotes}
@@ -76,7 +76,7 @@ class Voter extends Component {
           <p>
             Please{" "}
             <StyledButton as="button" onClick={toggleLogin}>
-              log in
+              Log in
             </StyledButton>{" "}
             to vote
           </p>
