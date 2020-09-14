@@ -49,6 +49,17 @@ export const StyledButton = styled(Link)`
   }
 `;
 
+// <a>
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 // <ul>
 export const StyledNav = styled(Nav)`
   display: flex;

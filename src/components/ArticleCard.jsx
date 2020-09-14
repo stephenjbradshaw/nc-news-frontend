@@ -1,6 +1,6 @@
 import React from "react";
 import Voter from "./Voter";
-import { Link } from "@reach/router";
+import { StyledLink } from "../styled/lib";
 import { formatTimeString } from "../utils/time";
 
 const ArticleCard = ({ article, className }) => {
@@ -13,15 +13,17 @@ const ArticleCard = ({ article, className }) => {
         <p>
           {article.topic} <br /> Posted by {article.author} {timeString}
         </p>
-        <Link to={`/article/${article.article_id}`}>
+        <StyledLink to={`/article/${article.article_id}`}>
           <h2>{article.title}</h2>
-        </Link>
+        </StyledLink>
 
         {article.body.length > 100 ? (
           <p>
             {article.body.slice(0, 100) + "... "}
 
-            <Link to={`/article/${article.article_id}`}>Read more</Link>
+            <StyledLink to={`/article/${article.article_id}`}>
+              Read more
+            </StyledLink>
           </p>
         ) : (
           article.body
@@ -29,12 +31,12 @@ const ArticleCard = ({ article, className }) => {
 
         <Voter kind={"article"} id={article.article_id} votes={article.votes} />
 
-        <Link
+        <StyledLink
           to={`/article/${article.article_id}`}
           state={{ fromCommentsLink: true }}
         >
           <p>{article.comment_count} comments</p>
-        </Link>
+        </StyledLink>
       </article>
     </li>
   );
