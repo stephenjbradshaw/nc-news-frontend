@@ -13,6 +13,7 @@ import CommentsList from "../components/CommentsList";
 import CommentCard from "../components/CommentCard";
 import AddComment from "../components/AddComment";
 import CommentLogin from "../components/CommentLogin";
+import Voter from "../components/Voter";
 
 export const AppTitle = styled.h1`
   text-align: center;
@@ -142,15 +143,38 @@ export const StyledCommentsList = styled(CommentsList)`
 
 // <li>
 export const StyledCommentCard = styled(CommentCard)`
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 350px;
   list-style-type: none;
-  text-align: center;
   margin: 1em;
   padding: 1em;
   border-radius: 10px;
   background-color: white;
   box-shadow: 1px 1px 10px 3px rgba(0, 0, 0, 0.5);
-  word-break: break-all;
+  word-break: break-word;
+`;
+
+// <button>
+export const StyledDeleteCommentButton = styled(StyledButton)`
+  align-self: flex-end;
+  background-color: white;
+  color: blue;
+  border-color: blue;
+
+  &:hover {
+    color: white;
+    background-color: red;
+    border-color: red;
+  }
+`;
+
+export const StyledVoter = styled(Voter)`
+  p {
+    margin: 0;
+  }
 `;
 
 export const StyledVoteButton = styled(VoteButton)`
