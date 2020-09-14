@@ -2,6 +2,7 @@ import React from "react";
 import Voter from "./Voter";
 import { formatTimeString } from "../utils/time";
 import { UserContext } from "../UserContext";
+import { StyledButton } from "../styled/lib";
 
 const CommentCard = ({ comment, deleteCommentOptimistic, className }) => {
   const timeDifference = Date.now() - new Date(comment.created_at);
@@ -13,11 +14,12 @@ const CommentCard = ({ comment, deleteCommentOptimistic, className }) => {
         {({ user }) => {
           if (user === comment.author)
             return (
-              <button
+              <StyledButton
+                as="button"
                 onClick={(event) => deleteCommentOptimistic(comment.comment_id)}
               >
-                Delete Comment
-              </button>
+                Delete
+              </StyledButton>
             );
         }}
       </UserContext.Consumer>

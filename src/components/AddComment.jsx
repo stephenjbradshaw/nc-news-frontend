@@ -43,7 +43,7 @@ class AddComment extends Component {
     if (err) return <ErrorPage {...err} />;
     return (
       <form className={className} onSubmit={this.handleSubmit}>
-        <label for="comment">Comment: </label>
+        <label htmlFor="comment">Comment: </label>
         <textarea
           id="comment"
           type="text"

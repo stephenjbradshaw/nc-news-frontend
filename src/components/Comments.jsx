@@ -6,7 +6,7 @@ import { UserContext } from "../UserContext";
 import ErrorPage from "./ErrorPage";
 import { StyledSortComments } from "../styled/lib";
 import { StyledCommentsList } from "../styled/lib";
-import CommentLogin from "./CommentLogin";
+import { StyledCommentLogin } from "../styled/lib";
 
 class Comments extends Component {
   static contextType = UserContext;
@@ -104,7 +104,7 @@ class Comments extends Component {
             article_id={article_id}
           />
         ) : (
-          <CommentLogin toggleLogin={toggleLogin} />
+          <StyledCommentLogin toggleLogin={toggleLogin} />
         )}
 
         <StyledCommentsList

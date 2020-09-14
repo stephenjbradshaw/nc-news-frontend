@@ -12,6 +12,7 @@ import SortComments from "../components/SortComments";
 import CommentsList from "../components/CommentsList";
 import CommentCard from "../components/CommentCard";
 import AddComment from "../components/AddComment";
+import CommentLogin from "../components/CommentLogin";
 
 export const AppTitle = styled.h1`
   text-align: center;
@@ -113,6 +114,11 @@ export const StyledAddComment = styled(AddComment)`
     margin-left: 0.5em;
     margin-right: 0.2em;
   }
+`;
+
+//<p>
+export const StyledCommentLogin = styled(CommentLogin)`
+  text-align: center;
 `;
 
 // <ul>
