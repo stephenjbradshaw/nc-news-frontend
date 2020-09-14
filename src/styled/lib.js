@@ -113,7 +113,7 @@ export const StyledSingleArticleCard = styled(SingleArticleCard)`
 // <Section>
 export const StyledSortComments = styled(SortComments)`
   text-align: center;
-  margin: 1em;
+  margin: 2em 1.5em 1.5em 1.5em;
 `;
 
 // <Form>
