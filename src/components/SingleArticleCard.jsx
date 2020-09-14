@@ -1,6 +1,7 @@
 import React from "react";
 import { StyledVoter } from "../styled/lib";
 import { formatTimeString } from "../utils/time";
+import { capitalizeFirstLetter } from "../utils/capitalize";
 
 const ArticleCard = ({ article, className }) => {
   const timeDifference = Date.now() - new Date(article.created_at);
@@ -9,7 +10,8 @@ const ArticleCard = ({ article, className }) => {
   return (
     <article className={className}>
       <p>
-        {article.topic} <br /> Posted by {article.author} {timeString}
+        {capitalizeFirstLetter(article.topic)} <br /> Posted by {article.author}{" "}
+        {timeString}
       </p>
       <h2>{article.title}</h2>
 
