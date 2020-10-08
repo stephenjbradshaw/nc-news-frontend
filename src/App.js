@@ -9,7 +9,7 @@ import ErrorPage from "./components/ErrorPage";
 import { StyledHeader } from "./styled/lib";
 
 class App extends Component {
-  state = { user: null, toggleLogin: this.toggleLogin };
+  state = { user: null };
 
   toggleLogin = () => {
     this.setState(({ user }) => {
