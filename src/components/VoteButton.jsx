@@ -3,11 +3,6 @@ import downArrow from "../img/DownArrow.svg";
 import upArrow from "../img/UpArrow.svg";
 import { UserContext } from "../UserContext";
 
-/*
-To do: get user off context (context provider)
-
-
-*/
 const VoteButton = (props) => {
   const { kind, updateVoteOptimistic } = props;
   return (
